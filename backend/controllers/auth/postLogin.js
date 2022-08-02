@@ -22,6 +22,7 @@ const postLogin = async (req, res) => {
           mail: user.mail,
           token,
           username: user.username,
+          _id: user._id,
         },
       });
     } else {

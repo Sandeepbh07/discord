@@ -7,6 +7,10 @@ require("dotenv").config();
 
 //routes
 const authRoutes = require("./routes/authRoutes");
+const friendInvitationRoutes = require("./routes/friendInvitationRoutes");
+
+//socketserver
+const { registerSocketServer } = require("./socketServer");
 
 const PORT = process.env.PORT || process.env.API_PORT;
 
@@ -17,8 +21,10 @@ app.use(morgan("combined"));
 
 //register the routes
 app.use("/api/auth", authRoutes);
+app.use("/api/friend-invitation", friendInvitationRoutes);
 
 const server = http.createServer(app);
+registerSocketServer(server);
 
 mongoose
   .connect(process.env.MONGO_URI)

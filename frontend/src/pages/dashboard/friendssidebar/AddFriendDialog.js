@@ -10,6 +10,8 @@ import {
 import { validateMail } from "../../../utils/validators";
 import InputWithLabel from "../../../components/InputWithLabel";
 import CustomPrimaryButton from "../../../components/CustomPrimaryButton";
+import { connect } from "react-redux";
+import { getActions } from "../../../store/actions/friendsActions";
 
 const AddFriendDialog = ({
   isDialogOpen,
@@ -21,6 +23,7 @@ const AddFriendDialog = ({
 
   const handleSendInvitation = () => {
     //send friend request to server
+    sendFriendInvitation({ targetMailAddress: mail });
   };
 
   const handleCloseDialog = () => {
@@ -67,4 +70,8 @@ const AddFriendDialog = ({
   );
 };
 
-export default AddFriendDialog;
+const mapActionsToProps = (dispatch) => {
+  return { ...getActions(dispatch) };
+};
+
+export default connect(null, mapActionsToProps)(AddFriendDialog);

@@ -7,6 +7,7 @@ import Messenger from "./messenger/Messenger";
 import AppBar from "./appbar/AppBar";
 import { logout } from "../../utils/auth";
 import { getActions } from "../../store/actions/authActions";
+import { connectWithSocketServer } from "../../realtimeCommunication/socketConnection";
 
 const Wrapper = styled("div")({
   width: "100%",
@@ -21,6 +22,7 @@ const Dashboard = ({ setUserDetails }) => {
       logout();
     } else {
       setUserDetails(JSON.parse(userDetails));
+      connectWithSocketServer(JSON.parse(userDetails));
     }
   }, []);
 
